@@ -1,9 +1,8 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, EmbedBuilder, Message, MessageComponentInteraction, player } from '../../client';
-import ytdl from 'ytdl-core';
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, EmbedBuilder, Message, MessageComponentInteraction, QueueRepeatMode, player, ytdl } from '../../client';
 
 module.exports = {
     name: 'nowplaying',
-    async execute(message: Message) {
+    async execute(message: Message<true>) {
         const queue = player.nodes.get(message.guild.id);
         const thumbnailInfo = await ytdl.getInfo(queue.currentTrack.url).then((data) => {
             return data.videoDetails.thumbnails[0].url;
@@ -21,11 +20,11 @@ module.exports = {
         .setFooter({text: `Listening on ${queue.currentTrack.source}`, iconURL: message.client.user.avatarURL({extension: 'png', forceStatic: false, size: 1024})})
         .addFields(
             {name: 'Channel', value: `${queue.currentTrack.author}`, inline: true},
-            {name: 'Requested by', value: `${queue.currentTrack.requestedBy.username}`, inline: true},
             {name: 'Duration', value: `${queue.currentTrack.duration}`, inline: true},
-            {name: 'Source', value: `[${queue.currentTrack.source}](${queue.currentTrack.url})`, inline: true},
             {name: 'Views', value: `${queue.currentTrack.views}`, inline: true},
-            {name: 'ID', value: `${queue.currentTrack.id}`, inline: true},
+            {name: 'Source', value: `[${queue.currentTrack.source}](${queue.currentTrack.url})`, inline: true},
+            {name: 'Requested by', value: `${queue.currentTrack.requestedBy.username}`, inline: true},
+            {name: 'Repeat Mode', value: `${queue.repeatMode === QueueRepeatMode.OFF ? 'Off' : 'On'}`, inline: true},
             {name: 'Progress Bar', value: `${queue.node.createProgressBar()}`, inline: true}
         )
         .setTimestamp();
