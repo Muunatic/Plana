@@ -1,11 +1,10 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, EmbedBuilder, Message, MessageComponentInteraction } from '../../client';
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, EmbedBuilder, Filter, Message, MessageComponentInteraction, ytdl } from '../../client';
 import { defaultError } from '../../structures/error';
 import fs from 'node:fs';
-import ytdl, { Filter } from 'ytdl-core';
 
 module.exports = {
     name: 'download',
-    async execute(message: Message, args: ReadonlyArray<string>) {
+    async execute(message: Message<true>, args: ReadonlyArray<string>) {
         if (!args[0]) return message.reply('**Berikan url YouTube <https://www.youtube.com/watch?v=>**');
         if (ytdl.validateURL(args[0]) === true) {
             let mimeType: string, filterVal: string, qualityVal: string, srcSize: string, srcFormat: ytdl.videoFormat;
