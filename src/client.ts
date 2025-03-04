@@ -3,6 +3,7 @@ import { BaseExtractor, GuildQueue, Player, QueueRepeatMode, SearchResult, Track
 import { SpotifyExtractor, YoutubeExtractor } from '@discord-player/extractor';
 import ytdl, { Filter, downloadOptions } from '@distube/ytdl-core';
 import { ClientOptions, ConstructorOptions } from './structures/option';
+import { basename } from 'path';
 import { token } from '../src/data/config';
 import { version } from '../package.json';
 
@@ -94,6 +95,7 @@ export {
     Collection,
     CommandInteraction,
     EmbedBuilder,
+    Filter,
     GuildQueue,
     Interaction,
     Message,
@@ -102,10 +104,10 @@ export {
     QueueRepeatMode,
     SearchResult,
     Track,
+    basename,
     client,
     clientOptions,
     player,
-    ytdl,
-    Filter,
-    token
+    token,
+    ytdl
 };
