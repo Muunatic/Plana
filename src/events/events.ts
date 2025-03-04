@@ -1,5 +1,5 @@
-console.info('Loading events.ts');
-import { GuildQueue, Message, Track, client, player } from '../client';
+import { GuildQueue, Message, Track, basename, client, player } from '../client';
+console.info(`Loading ${basename(__filename)}`);
 
 client.on('shardDisconnect', () => {
     console.log('Disconnect');

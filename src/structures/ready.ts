@@ -1,7 +1,7 @@
-console.info('Loading ready.ts');
 import semver from 'semver';
-import { ActivityType, client } from '../client';
+import { ActivityType, basename, client } from '../client';
 import clientPackage from '../../package.json';
+console.info(`Loading ${basename(__filename)}`);
 
 client.once('ready', () => {
     console.log(client.user.username + '#' + client.user.discriminator + ': \x1b[32m' + 'Hello, World!' + '\x1b[0m');
