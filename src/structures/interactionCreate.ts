@@ -1,6 +1,6 @@
-console.info('Loading interactionCreate.ts');
-import { Interaction, client } from '../client';
+import { Interaction, basename, client, clientOptions } from '../client';
 import { defaultError } from '../structures/error';
+console.info(`Loading ${basename(__filename)}`);
 
 client.on('interactionCreate', async (interaction: Interaction) => {
 
@@ -10,6 +10,10 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     const command = client.commands.get(interaction.commandName);
 
     if (!command) return;
+
+    if (clientOptions.maintenanceMode) {
+        return interaction.reply('Under Maintenance');
+    }
 
     try {
         await command.execute(interaction);

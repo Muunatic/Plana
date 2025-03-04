@@ -1,7 +1,7 @@
-console.info('Loading messageCreate.ts');
-import { Message, client } from '../client';
+import { Message, basename, client, clientOptions } from '../client';
 import { prefix } from '../data/config';
 import { defaultError } from '../structures/error';
+console.info(`Loading ${basename(__filename)}`);
 
 client.on('messageCreate', async (message: Message) => {
 
@@ -13,6 +13,10 @@ client.on('messageCreate', async (message: Message) => {
     if (!message.guild) return;
 
     if (!cmd) return;
+
+    if (clientOptions.maintenanceMode) {
+        return message.reply('Under Maintenance');
+    }
 
     try {
         await cmd.execute(message, args);
