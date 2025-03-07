@@ -26,7 +26,7 @@ module.exports = {
         .setThumbnail(interaction.client.user.avatarURL({extension: 'png', forceStatic: false, size: 4096}))
         .setDescription(`Prefix = **${prefix}**`)
         .addFields({ name: 'General command', value: commands.sort((a, b) => a.localeCompare(b)).join(', ') })
-        .setFooter({ text: `Direquest oleh ${interaction.user.username}`, iconURL: interaction.user.avatarURL({ extension: 'png', forceStatic: false, size: 1024 }) })
+        .setFooter({ text: `Requested by ${interaction.user.username}`, iconURL: interaction.user.avatarURL({ extension: 'png', forceStatic: false, size: 1024 }) })
         .setTimestamp();
 
         await interaction.reply({ embeds: [embed] });

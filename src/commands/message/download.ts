@@ -5,7 +5,7 @@ import fs from 'node:fs';
 module.exports = {
     name: 'download',
     async execute(message: Message<true>, args: ReadonlyArray<string>) {
-        if (!args[0]) return message.reply('**Berikan url YouTube <https://www.youtube.com/watch?v=>**');
+        if (!args[0]) return message.reply('**Provide a YouTube URL <https://www.youtube.com/watch?v=>**');
         if (ytdl.validateURL(args[0]) === true) {
             let mimeType: string, filterVal: string, qualityVal: string, srcSize: string, srcFormat: ytdl.videoFormat;
             const srcInfo = ytdl.getInfo(args[0]);
@@ -23,7 +23,7 @@ module.exports = {
                 {name: '🎵 MP3', value: `${mp3Size ? mp3Size === 'NaN MB' ? 'Unavailable' : mp3Size : mp3Size === 'NaN MB' ? 'Unavailable' : mp3Size}`, inline: false},
                 {name: '📹 MP4', value: `${mp4Size ? mp4Size === 'NaN MB' ? 'Unavailable' : mp4Size : mp4Size === 'NaN MB' ? 'Unavailable' : mp4Size}`, inline: false}
             )
-            .setFooter({text: `Direquest oleh ${message.author.username}`, iconURL: message.author.avatarURL({extension: 'png', forceStatic: false, size: 1024})})
+            .setFooter({text: `Requested by ${message.author.username}`, iconURL: message.author.avatarURL({extension: 'png', forceStatic: false, size: 1024})})
             .setTimestamp();
 
             const row = new ActionRowBuilder<ButtonBuilder>()
@@ -67,7 +67,7 @@ module.exports = {
                                     await message.reply({files: [{
                                         attachment: message.id + `.${mimeType}`,
                                         name: (await srcInfo).videoDetails.title + `.${mimeType}`,
-                                        description: 'Direquest oleh ' + message.author.username
+                                        description: 'Requested by ' + message.author.username
                                     }]}).then(() => {
                                         fs.unlink(message.id + `.${mimeType}`, (err: Error) => {
                                             if (err) throw err.message;
@@ -76,7 +76,7 @@ module.exports = {
                                 })().catch((err) => console.error(err));
                             });
                         } else {
-                            await message.reply(`**Ukuran file ${mimeType} melebihi 8 MB!**`);
+                            await message.reply(`**The file size of ${mimeType} exceeds 8 MB!**`);
                         }
                     }
 

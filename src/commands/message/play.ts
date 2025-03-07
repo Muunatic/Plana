@@ -15,13 +15,14 @@ module.exports = {
             }
         });
 
-        if (!message.member.voice.channel) return message.reply('**Kamu tidak divoice channel!**');
+        if (!message.member.voice.channel) return message.reply('**You are not in a voice channel!**');
 
-        if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply('**Kamu tidak divoice channel yang sama!**');
+        if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id)
+            return message.reply('**You are not in the same voice channel!**');
 
-        if (message.member.voice.channel.full === true) return message.reply('**Voice channel full!**');
+        if (message.member.voice.channel.full === true) return message.reply('**Voice channel is full!**');
 
-        if (!args[0]) return message.reply('**Berikan judul untuk memulai lagu**');
+        if (!args[0]) return message.reply('**Provide a title to start playing a song**');
 
         try {
             if (!queue.connection) await queue.connect(message.member.voice.channel);
@@ -49,6 +50,6 @@ module.exports = {
 
         await queue.node.play(track);
 
-        return message.channel.send({ content: `Menambahkan lagu **${track.title}** di **${message.member.voice.channel.name}...**` });
+        return message.channel.send({ content: `Added song **${track.title}** to **${message.member.voice.channel.name}...**` });
     }
 };
