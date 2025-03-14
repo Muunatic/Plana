@@ -1,6 +1,5 @@
 import semver from 'semver';
-import { ActivityType, basename, client } from '../client';
-import clientPackage from '../../package.json';
+import { ActivityType, basename, client, clientOptions } from '../client';
 console.info(`Loading ${basename(__filename)}`);
 
 client.once('ready', () => {
@@ -25,8 +24,8 @@ const checkSemver = async (): Promise<void> => {
         return res.json();
     }).then((data: {tag_name: string, html_url: string}) => {
         if (data) {
-            if (semver.lt(clientPackage.version, data.tag_name)) {
-                return console.warn('\n\n \x1b[33m' + 'WARN' + '\x1B[0m' + ': ' + clientPackage.name.charAt(0).toUpperCase() + clientPackage.name.slice(1) + ' is ' + '\x1b[31moutdated\x1b[0m' + `! download new release \x1b[32mv${data.tag_name}\x1b[0m from \x1b[34m${data.html_url}\x1b[0m \n\n`);
+            if (semver.lt(clientOptions.version, data.tag_name)) {
+                return console.warn('\n\n \x1b[33m' + 'WARN' + '\x1B[0m' + ': ' + clientOptions.name.charAt(0).toUpperCase() + clientOptions.name.slice(1) + ' is ' + '\x1b[31moutdated\x1b[0m' + `! download new release \x1b[32mv${data.tag_name}\x1b[0m from \x1b[34m${data.html_url}\x1b[0m \n\n`);
             } else {
                 return;
             }
