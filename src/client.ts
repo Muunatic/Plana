@@ -2,10 +2,10 @@ import { ActionRowBuilder, ActivityType, BaseGuildTextChannel, ButtonBuilder, Bu
 import { BaseExtractor, GuildQueue, Player, QueueRepeatMode, SearchResult, Track } from 'discord-player';
 import { SpotifyExtractor, YoutubeExtractor } from '@discord-player/extractor';
 import ytdl, { Filter, downloadOptions } from '@distube/ytdl-core';
-import { ClientOptions, ConstructorOptions } from './structures/option';
+import { ClientOptions, CmdOptions, ConstructorOptions } from './structures/option';
 import { basename } from 'path';
 import { token } from '../src/data/config';
-import { version } from '../package.json';
+import { name, version } from '../package.json';
 
 class Core {
     public client: Client;
@@ -54,6 +54,7 @@ class Core {
 
         this.clientOptions = {
             maintenanceMode,
+            name: name,
             version: version
         };
     }
@@ -93,6 +94,7 @@ export {
     ButtonInteraction,
     ButtonStyle,
     Collection,
+    CmdOptions,
     CommandInteraction,
     EmbedBuilder,
     Filter,
