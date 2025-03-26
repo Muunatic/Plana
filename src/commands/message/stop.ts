@@ -1,6 +1,6 @@
-import { Message, player } from '../../client';
+import { CmdOptions, Message, player } from '../../client';
 
-module.exports = {
+export = {
     name: 'stop',
     async execute(message: Message<true>) {
         const queue = player.nodes.get(message.guild.id);
@@ -10,4 +10,4 @@ module.exports = {
         queue.delete();
         await message.reply('**Song has been stopped**');
     }
-};
+} as CmdOptions;

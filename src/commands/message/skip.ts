@@ -1,6 +1,6 @@
-import { Message, player } from '../../client';
+import { CmdOptions, Message, player } from '../../client';
 
-module.exports = {
+export = {
     name: 'skip',
     aliases: ['next'],
     async execute(message: Message<true>) {
@@ -11,4 +11,4 @@ module.exports = {
         queue.node.skip();
         await message.reply('**Song has been skipped**');
     }
-};
+} as CmdOptions<true>;

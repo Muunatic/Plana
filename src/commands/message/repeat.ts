@@ -1,6 +1,6 @@
-import { Message, QueueRepeatMode, player } from '../../client';
+import { CmdOptions, Message, QueueRepeatMode, player } from '../../client';
 
-module.exports = {
+export = {
     name: 'repeat',
     aliases: ['loop'],
     async execute(message: Message<true>) {
@@ -18,4 +18,4 @@ module.exports = {
         };
         await message.reply(nowMode ? `Loop **${queue.repeatMode === QueueRepeatMode.OFF ? 'disabled' : 'enabled'}**` : `Loop **${queue.repeatMode === QueueRepeatMode.OFF ? 'disabled' : 'enabled'}**`);
     }
-};
+} as CmdOptions;

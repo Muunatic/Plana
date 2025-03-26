@@ -1,7 +1,7 @@
-import { Message, Track, player } from '../../client';
+import { CmdOptions, Message, Track, player } from '../../client';
 import { defaultError } from '../../structures/error';
 
-module.exports = {
+export = {
     name: 'play',
     async execute(message: Message<true>, args: ReadonlyArray<string>) {
         const query = args.join(' ').toString();
@@ -52,4 +52,4 @@ module.exports = {
 
         return message.channel.send({ content: `Added song **${track.title}** to **${message.member.voice.channel.name}...**` });
     }
-};
+} as CmdOptions;

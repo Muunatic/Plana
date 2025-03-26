@@ -1,7 +1,7 @@
-import { EmbedBuilder, Message, SearchResult, player } from '../../client';
+import { CmdOptions, EmbedBuilder, Message, SearchResult, player } from '../../client';
 import { defaultError } from '../../structures/error';
 
-module.exports = {
+export = {
     name: 'search',
     async execute(message: Message<true>, args: ReadonlyArray<string>) {
         const query = args.join(' ').toString();
@@ -79,4 +79,4 @@ module.exports = {
             }
         });
     }
-};
+} as CmdOptions;

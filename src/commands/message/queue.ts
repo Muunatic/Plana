@@ -1,6 +1,6 @@
-import { Message, player } from '../../client';
+import { CmdOptions, Message, player } from '../../client';
 
-module.exports = {
+export = {
     name: 'queue',
     async execute(message: Message<true>) {
         const queue = player.nodes.get(message.guild.id);
@@ -12,4 +12,4 @@ module.exports = {
             return `**#${i + 1}** - **${track.title}** | **${track.author}** (requested by: **${track.requestedBy.username}**)`;
         }).slice(0, 5).join('\n') + `\n\n${queue.tracks.data.length > 5 ? `and **${queue.tracks.data.length - 5}** more songs...` : `Playlist contains **${queue.tracks.data.length}** songs...`}`));
     }
-};
+} as CmdOptions;

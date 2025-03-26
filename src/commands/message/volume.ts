@@ -1,6 +1,6 @@
-import { Message, player } from '../../client';
+import { CmdOptions, Message, player } from '../../client';
 
-module.exports = {
+export = {
     name: 'volume',
     async execute(message: Message<true>, args: ReadonlyArray<string>) {
         const queue = player.nodes.get(message.guild.id);
@@ -11,4 +11,4 @@ module.exports = {
         queue.node.setVolume(parseInt(args[0]));
         await message.reply(`Volume has been set to **${args[0]}%**`);
     }
-};
+} as CmdOptions;

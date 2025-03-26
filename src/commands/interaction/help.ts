@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, EmbedBuilder } from '../../client';
+import { CmdOptions, CommandInteraction, EmbedBuilder } from '../../client';
 import { prefix } from '../../data/config';
 
-module.exports = {
+export = {
     data: new SlashCommandBuilder()
     .setName('help')
     .setDescription('Help command'),
@@ -31,4 +31,4 @@ module.exports = {
 
         await interaction.reply({ embeds: [embed] });
     }
-};
+} as CmdOptions<false>;

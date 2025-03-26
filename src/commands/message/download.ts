@@ -1,8 +1,8 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, EmbedBuilder, Filter, Message, MessageComponentInteraction, ytdl } from '../../client';
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CmdOptions, EmbedBuilder, Filter, Message, MessageComponentInteraction, ytdl } from '../../client';
 import { defaultError } from '../../structures/error';
 import fs from 'node:fs';
 
-module.exports = {
+export = {
     name: 'download',
     async execute(message: Message<true>, args: ReadonlyArray<string>) {
         if (!args[0]) return message.reply('**Provide a YouTube URL <https://www.youtube.com/watch?v=>**');
@@ -95,4 +95,4 @@ module.exports = {
             return message.reply({content: defaultError});
         }
     }
-};
+} as CmdOptions;

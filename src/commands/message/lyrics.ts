@@ -1,7 +1,7 @@
-import { EmbedBuilder, Message, player, ytdl } from '../../client';
+import { CmdOptions, EmbedBuilder, Message, player, ytdl } from '../../client';
 import { defaultError } from '../../structures/error';
 
-module.exports = {
+export = {
     name: 'lyrics',
     async execute(message: Message<true>) {
         const queue = player.nodes.get(message.guild.id);
@@ -27,4 +27,4 @@ module.exports = {
 
         await message.reply({embeds: [embed]});
     }
-};
+} as CmdOptions;

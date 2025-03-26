@@ -1,6 +1,6 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, EmbedBuilder, Message, MessageComponentInteraction, QueueRepeatMode, player, ytdl } from '../../client';
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CmdOptions, EmbedBuilder, Message, MessageComponentInteraction, QueueRepeatMode, player, ytdl } from '../../client';
 
-module.exports = {
+export = {
     name: 'nowplaying',
     async execute(message: Message<true>) {
         const queue = player.nodes.get(message.guild.id);
@@ -111,4 +111,4 @@ module.exports = {
             }, 5000);
         });
     }
-};
+} as CmdOptions;
