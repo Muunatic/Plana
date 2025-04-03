@@ -15,7 +15,7 @@ export = {
         const commands: string[] = [];
 
         for (const file of commandFiles) {
-            const command = require(path.join(commandsFolder, file));
+            const command = await import(path.join(commandsFolder, file));
             if (command.name) commands.push(command.name);
         }
 
