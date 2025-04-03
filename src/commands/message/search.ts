@@ -9,7 +9,8 @@ export = {
             selfDeaf: true,
             leaveOnEnd: true,
             leaveOnEmpty: true,
-            leaveOnEmptyCooldown: 5000,
+            leaveOnEmptyCooldown: 10000,
+            leaveOnEndCooldown: 10000,
             metadata: {
                 channel: message.channel
             }
