@@ -70,7 +70,7 @@ export = {
                                         description: 'Requested by ' + message.author.username
                                     }]}).then(() => {
                                         fs.unlink(message.id + `.${mimeType}`, (err: Error) => {
-                                            if (err) throw err.message;
+                                            if (err) throw new Error(err.message);
                                         });
                                     });
                                 })().catch((err) => console.error(err));
