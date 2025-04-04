@@ -1,7 +1,8 @@
 import { ActionRowBuilder, ActivityType, BaseGuildTextChannel, ButtonBuilder, ButtonInteraction, ButtonStyle, Client, Collection, CommandInteraction, EmbedBuilder, GatewayIntentBits, Interaction, Message, MessageComponentInteraction, Partials } from 'discord.js';
 import { BaseExtractor, GuildQueue, Player, QueueRepeatMode, SearchResult, Track } from 'discord-player';
-import { SpotifyExtractor, YoutubeExtractor } from '@discord-player/extractor';
-import ytdl, { Filter, downloadOptions } from '@distube/ytdl-core';
+import { YoutubeiExtractor } from 'discord-player-youtubei';
+import { SpotifyExtractor } from '@discord-player/extractor';
+import ytdl, { Filter } from '@distube/ytdl-core';
 import { ClientOptions, CmdOptions, ConstructorOptions } from './structures/option';
 import { basename } from 'path';
 import { token } from '../src/data/config';
@@ -43,14 +44,7 @@ class Core {
             ]
         });
 
-        this.player = new Player(this.client, {
-            ytdlOptions: {
-                quality: 'highestaudio',
-                filter: 'audioonly',
-                highWaterMark: 1 << 25,
-                dlChunkSize: 0
-            } as downloadOptions
-        });
+        this.player = new Player(this.client);
 
         this.clientOptions = {
             maintenanceMode,
@@ -71,7 +65,7 @@ class Core {
 
     public async start(): Promise<void> {
         try {
-            await this.registerExtractors([YoutubeExtractor, SpotifyExtractor]);
+            await this.registerExtractors([SpotifyExtractor, YoutubeiExtractor]);
             await this.client.login(token).catch((error: Error) => console.error('\x1b[31mError\x1b[0m:', error.message));
         } catch (error: unknown) {
             console.error('Error running client:', error);
