@@ -4,7 +4,15 @@ import { defaultError } from '../../structures/error';
 export = {
     name: 'play',
     async execute(message: Message<true>, args: ReadonlyArray<string>) {
-        const query = args.join(' ').toString();
+        if (!message.member.voice.channel) return message.reply('**You are not in a voice channel!**');
+
+        if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply('**You are not in the same voice channel!**');
+
+        if (message.member.voice.channel.full === true) return message.reply('**Voice channel is full!**');
+
+        if (!args[0]) return message.reply('**Provide a title to start playing a song**');
+
+        const query = args.join(' ').trim().replace(/^<(.+)>$/, '$1').toString();
         const queue = player.nodes.create(message.guild, {
             selfDeaf: true,
             leaveOnEnd: true,
@@ -15,15 +23,6 @@ export = {
                 channel: message.channel
             }
         });
-
-        if (!message.member.voice.channel) return message.reply('**You are not in a voice channel!**');
-
-        if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id)
-            return message.reply('**You are not in the same voice channel!**');
-
-        if (message.member.voice.channel.full === true) return message.reply('**Voice channel is full!**');
-
-        if (!args[0]) return message.reply('**Provide a title to start playing a song**');
 
         try {
             if (!queue.connection) await queue.connect(message.member.voice.channel);
