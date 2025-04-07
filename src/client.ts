@@ -56,10 +56,20 @@ class Core {
     private async registerExtractors(extractors: ReadonlyArray<typeof BaseExtractor<object>>): Promise<void> {
         try {
             for (const extractor of extractors) {
-                await this.player.extractors.register(extractor, {});
+                if (/YoutubeiExtractor/.test(extractor.name.toString())) {
+                    await this.player.extractors.register(extractor, {
+                        streamOptions: {
+                            useClient: 'IOS'
+                        }
+                    });
+                } else {
+                    await this.player.extractors.register(extractor, {});
+                }
+
+                console.log(`Registered extractor: ${extractor.name}`);
             }
         } catch (error: unknown) {
-            console.error('Error registering extractors:', error);
+            throw new Error('Error registering extractors', error);
         }
     }
 
@@ -68,7 +78,7 @@ class Core {
             await this.registerExtractors([SpotifyExtractor, YoutubeiExtractor]);
             await this.client.login(token).catch((error: Error) => console.error('\x1b[31mError\x1b[0m:', error.message));
         } catch (error: unknown) {
-            console.error('Error running client:', error);
+            throw new Error('Error running client', error);
         }
     }
 }
