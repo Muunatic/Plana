@@ -80,6 +80,8 @@ export default tseslint.config(
                 "ignoreDeclarationSort": true
             }]
         },
+    },
+    {
         ignores: [
             "node_modules",
             "package.json",
