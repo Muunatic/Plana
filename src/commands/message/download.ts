@@ -1,10 +1,12 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CmdOptions, EmbedBuilder, Filter, Message, MessageComponentInteraction, ytdl } from '../../client';
+import { ytCookieArray } from '../../data/config';
 import { defaultError } from '../../structures/error';
 import fs from 'node:fs';
 
 export = {
     name: 'download',
     async execute(message: Message<true>, args: ReadonlyArray<string>) {
+        const agent = ytCookieArray ? ytdl.createAgent(ytCookieArray as ytdl.Cookie[]) : undefined;
         if (!args[0]) return message.reply('**Provide a YouTube URL <https://www.youtube.com/watch?v=>**');
         if (ytdl.validateURL(args[0]) === true) {
             let mimeType: string, filterVal: string, qualityVal: string, srcSize: string, srcFormat: ytdl.videoFormat;
@@ -55,7 +57,7 @@ export = {
                         srcSize = (parseInt(srcFormat.contentLength) / 1024 / 1024).toFixed(2);
                         if (parseInt(srcSize) < 8.00 && parseInt(srcSize) >= 0.00) {
                             await message.react('✅');
-                            ytdl(args[0], {filter: filterVal as Filter, quality: qualityVal})
+                            ytdl(args[0], {filter: filterVal as Filter, quality: qualityVal, agent: agent ? agent : undefined})
                             .pipe(fs.createWriteStream(message.id + `.${mimeType}`))
                             .on('error', () => {
                                 void (async () => {
