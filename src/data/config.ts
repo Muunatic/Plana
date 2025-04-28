@@ -1,3 +1,4 @@
-export const token = 'token';
-export const prefix = 'prefix';
-export const clientId = 'clientId';
+export const token: string = 'token';
+export const prefix: string = 'prefix';
+export const clientId: string = 'clientId';
+export const ytCookieArray: ReadonlyArray<object> = [{}];
