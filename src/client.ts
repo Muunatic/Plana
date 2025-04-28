@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ActivityType, BaseGuildTextChannel, ButtonBuilder, ButtonInteraction, ButtonStyle, Client, Collection, CommandInteraction, EmbedBuilder, GatewayIntentBits, Interaction, Message, MessageComponentInteraction, Partials } from 'discord.js';
 import { BaseExtractor, GuildQueue, Player, QueueRepeatMode, SearchResult, Track } from 'discord-player';
-import { YoutubeiExtractor } from 'discord-player-youtubei';
+import { YoutubeiExtractor, YoutubeiOptions } from 'discord-player-youtubei';
 import { SpotifyExtractor } from '@discord-player/extractor';
 import ytdl, { Filter } from '@distube/ytdl-core';
 import { ClientOptions, CmdOptions, ConstructorOptions } from './structures/option';
@@ -61,7 +61,9 @@ class Core {
                         streamOptions: {
                             useClient: 'IOS'
                         }
-                    });
+                    } as YoutubeiOptions);
+
+                    console.log('Succesfully Modify YouTube Extractor');
                 } else {
                     await this.player.extractors.register(extractor, {});
                 }
