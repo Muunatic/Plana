@@ -1,18 +1,19 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, EmbedBuilder, Message, MessageComponentInteraction } from '../../client';
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, CmdOptions, EmbedBuilder, Filter, Message, MessageComponentInteraction, ytdl } from '../../client';
+import { ytCookieArray } from '../../data/config';
 import { defaultError } from '../../structures/error';
 import fs from 'node:fs';
-import ytdl, { Filter } from 'ytdl-core';
 
-module.exports = {
+export = {
     name: 'download',
-    async execute(message: Message, args: ReadonlyArray<string>) {
-        if (!args[0]) return message.reply('**Berikan url YouTube <https://www.youtube.com/watch?v=>**');
+    async execute(message: Message<true>, args: ReadonlyArray<string>) {
+        const agent = ytCookieArray ? ytdl.createAgent(ytCookieArray as ytdl.Cookie[]) : undefined;
+        if (!args[0]) return message.reply('**Provide a YouTube URL <https://www.youtube.com/watch?v=>**');
         if (ytdl.validateURL(args[0]) === true) {
             let mimeType: string, filterVal: string, qualityVal: string, srcSize: string, srcFormat: ytdl.videoFormat;
             const srcInfo = ytdl.getInfo(args[0]);
             const mp3Size = (parseInt(ytdl.chooseFormat((await srcInfo).formats, {filter: 'audioonly', quality: 'highestaudio'}).contentLength) / 1024 / 1024).toFixed(2) + ' MB';
             const mp4Size = (parseInt(ytdl.chooseFormat((await srcInfo).formats, {filter: 'audioandvideo', quality: 'highest'}).contentLength) / 1024 / 1024).toFixed(2) + ' MB';
-            const extType: string[] = [ "mp3", "mp4" ];
+            const extType: string[] = [ 'mp3', 'mp4' ];
 
             const embed = new EmbedBuilder()
             .setColor('#89e0dc')
@@ -24,7 +25,7 @@ module.exports = {
                 {name: '🎵 MP3', value: `${mp3Size ? mp3Size === 'NaN MB' ? 'Unavailable' : mp3Size : mp3Size === 'NaN MB' ? 'Unavailable' : mp3Size}`, inline: false},
                 {name: '📹 MP4', value: `${mp4Size ? mp4Size === 'NaN MB' ? 'Unavailable' : mp4Size : mp4Size === 'NaN MB' ? 'Unavailable' : mp4Size}`, inline: false}
             )
-            .setFooter({text: `Direquest oleh ${message.author.username}`, iconURL: message.author.avatarURL({extension: 'png', forceStatic: false, size: 1024})})
+            .setFooter({text: `Requested by ${message.author.username}`, iconURL: message.author.avatarURL({extension: 'png', forceStatic: false, size: 1024})})
             .setTimestamp();
 
             const row = new ActionRowBuilder<ButtonBuilder>()
@@ -56,7 +57,7 @@ module.exports = {
                         srcSize = (parseInt(srcFormat.contentLength) / 1024 / 1024).toFixed(2);
                         if (parseInt(srcSize) < 8.00 && parseInt(srcSize) >= 0.00) {
                             await message.react('✅');
-                            ytdl(args[0], {filter: filterVal as Filter, quality: qualityVal})
+                            ytdl(args[0], {filter: filterVal as Filter, quality: qualityVal, agent: agent ? agent : undefined})
                             .pipe(fs.createWriteStream(message.id + `.${mimeType}`))
                             .on('error', () => {
                                 void (async () => {
@@ -68,16 +69,16 @@ module.exports = {
                                     await message.reply({files: [{
                                         attachment: message.id + `.${mimeType}`,
                                         name: (await srcInfo).videoDetails.title + `.${mimeType}`,
-                                        description: 'Direquest oleh ' + message.author.username
+                                        description: 'Requested by ' + message.author.username
                                     }]}).then(() => {
                                         fs.unlink(message.id + `.${mimeType}`, (err: Error) => {
-                                            if (err) throw err.message;
+                                            if (err) throw new Error(err.message);
                                         });
                                     });
                                 })().catch((err) => console.error(err));
                             });
                         } else {
-                            await message.reply(`**Ukuran file ${mimeType} melebihi 8 MB!**`);
+                            await message.reply(`**The file size of ${mimeType} exceeds 8 MB!**`);
                         }
                     }
 
@@ -96,4 +97,4 @@ module.exports = {
             return message.reply({content: defaultError});
         }
     }
-};
+} as CmdOptions;

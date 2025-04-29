@@ -1,4 +1,5 @@
-console.info('Loading error.ts');
+import { basename } from '../client';
+console.info(`Loading ${basename(__filename)}`);
 
 process.on('unhandledRejection', (error) => {
     console.error('Unhandled Promise Rejection:', error);

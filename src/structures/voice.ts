@@ -1,6 +1,6 @@
-console.info('Loading voice.ts');
-import { GuildQueue, player } from '../client';
+import { GuildQueue, basename, player } from '../client';
 import { VoiceConnection, VoiceConnectionState, VoiceConnectionStatus } from '@discordjs/voice';
+console.info(`Loading ${basename(__filename)}`);
 
 player.events.on('connection', (queue: GuildQueue<unknown>) => {
     (queue.dispatcher.voiceConnection as unknown as VoiceConnection).on('stateChange', (oldState: VoiceConnectionState, newState: VoiceConnectionState) => {

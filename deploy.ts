@@ -1,7 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import { REST } from '@discordjs/rest';
-import { Routes } from 'discord-api-types/v10';
+import { REST, Routes } from 'discord.js';
 import { clientId, token } from './src/data/config';
 
 const commands: string[] = [];
@@ -22,9 +21,9 @@ const rest = new REST({ version: '10' }).setToken(token);
 void (async () => {
 
     try {
-        console.log("Deploying");
+        console.log('Deploying');
         await rest.put(Routes.applicationCommands(clientId), { body: commands });
-        console.log("Deployed");
+        console.log('Deployed');
     } catch (error) {
         console.error(error);
     }

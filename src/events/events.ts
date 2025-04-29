@@ -1,5 +1,5 @@
-console.info('Loading events.ts');
-import { GuildQueue, Message, Track, client, player } from '../client';
+import { GuildQueue, Message, Track, basename, client, player } from '../client';
+console.info(`Loading ${basename(__filename)}`);
 
 client.on('shardDisconnect', () => {
     console.log('Disconnect');
@@ -10,15 +10,15 @@ client.on('shardReconnecting', () => {
 });
 
 player.events.on('emptyChannel', async (queue: GuildQueue<unknown>) => {
-    await (<Message>queue.metadata).channel.send('**Tidak ada member di voice**');
+    await (<Message<true>>queue.metadata).channel.send('**No members in the voice channel**');
 });
 
 player.events.on('playerStart', async (queue: GuildQueue<unknown>, track: Track) => {
-    await (<Message>queue.metadata).channel.send(`Memutar lagu **${track.title}**`);
+    await (<Message<true>>queue.metadata).channel.send(`Now playing **${track.title}**`);
 });
 
 player.events.on('emptyQueue', async (queue: GuildQueue<unknown>) => {
-    await (<Message>queue.metadata).channel.send('**Tidak ada music yang tersisa**');
+    await (<Message<true>>queue.metadata).channel.send('**No music left in the queue**');
 });
 
 player.events.on('playerError', (queue: GuildQueue<unknown>, error: Error) => {
