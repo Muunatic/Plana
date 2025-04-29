@@ -4,13 +4,27 @@ Please report security issues to [Muunatic](mailto:muunatic@typeslint.com)
 
 <details open>
 
-  <summary><b>v3</b></summary>
+  <summary><b>v4</b></summary>
   
   <br>
   
   |Version|Vulnerability|
   |-|-|
-  |3.1.1|:heavy_check_mark:|
+  |4.0.0|:white_check_mark:|
+
+</details>
+
+<details>
+
+  <summary><b>v3</b></summary>
+  
+  #### ⚠️ No longer supported ⚠️
+  
+  <br>
+  
+  |Version|Vulnerability|
+  |-|-|
+  |3.1.1|:x:|
   |3.1.0|:x:|
   |3.0.1|:x:|
   |3.0.0|:x:|
