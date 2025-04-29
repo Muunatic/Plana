@@ -1,6 +1,6 @@
 # Contribution Guide
 
-Welcome to the contribution guide! I appreciate your interest in contributing to Columbina project. This guide will provide you with the necessary information and guidelines to make your contributions valuable and effective.
+Welcome to the contribution guide! I appreciate your interest in contributing to Plana project. This guide will provide you with the necessary information and guidelines to make your contributions valuable and effective.
 
 ### 1. Getting started
 
@@ -51,10 +51,10 @@ For more information about the Conventional Commits specification, you can refer
 When contributing code or any other content, it's important to ensure that your contributions are your own original creation and do not violate any copyright laws or infringe upon the intellectual property rights of others. By contributing to this repository, you agree to the following:
 
 - You warrant that the contribution is your original work.
-- You agree to grant the repository maintainers and users a license to use your contributions under the repository's designated license. [LICENSE](https://github.com/Muunatic/Columbina/blob/v3/LICENSE)
+- You agree to grant the repository maintainers and users a license to use your contributions under the repository's designated license. [LICENSE](https://github.com/Muunatic/Plana/blob/v4/LICENSE)
 
 Please refrain from including any code, documentation, or other content in your contributions that may have been copied or derived from copyrighted sources without the necessary permissions or licenses.
 
 ### 6. LICENSE
 
-By contributing to this repository, you agree that your contributions will be licensed under the same license as the repository itself. Please refer to the repository's [LICENSE](https://github.com/Muunatic/Columbina/blob/v3/LICENSE) file for more details.
+By contributing to this repository, you agree that your contributions will be licensed under the same license as the repository itself. Please refer to the repository's [LICENSE](https://github.com/Muunatic/Plana/blob/v4/LICENSE) file for more details.
