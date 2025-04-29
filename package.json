@@ -1,7 +1,7 @@
 {
-  "name": "columbina",
-  "version": "3.1.1",
-  "description": "Columbina Damselette",
+  "name": "plana",
+  "version": "4.0.0",
+  "description": "P.L.A.N.A",
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc --build --clean && tsc --build --force --verbose",
@@ -16,28 +16,31 @@
   "author": "Muunatic",
   "license": "AGPL-3.0",
   "dependencies": {
-    "@discord-player/extractor": "4.4.7",
-    "@discordjs/builders": "^1.8.1",
+    "@discord-player/extractor": "7.1.0",
+    "@discordjs/builders": "^1.11.1",
     "@discordjs/collection": "^2.0.0",
-    "@discordjs/rest": "^2.3.0",
-    "@discordjs/voice": "^0.17.0",
-    "@discordjs/opus": "0.9.0",
-    "discord-api-types": "^0.37.83",
-    "discord-player": "6.6.8",
-    "discord.js": "^14.15.2",
+    "@discordjs/voice": "^0.18.0",
+    "@distube/ytdl-core": "~4.16.9",
+    "bgutils-js": "^3.2.0",
+    "discord-player": "7.1.0",
+    "discord-player-youtubei": "1.4.5",
+    "discord.js": "^14.19.2",
     "ffmpeg": "0.0.4",
-    "ytdl-core": "4.11.5"
+    "mediaplex": "1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^18.19.32",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.57.0",
+    "@eslint/js": "^9.25.1",
+    "@types/node": "^20.17.32",
+    "@types/semver": "^7.7.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
     "ffmpeg-static": "^4.4.1",
-    "typescript": "5.3.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.1"
   },
   "engines": {
-    "node": ">=18.16.1",
-    "npm": ">=9.5.1"
+    "node": ">=20.19.0",
+    "npm": ">=10.8.2"
   }
 }
