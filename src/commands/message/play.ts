@@ -1,4 +1,4 @@
-import { CmdOptions, Message, Track, player } from '../../client';
+import { CmdOptions, Message, Track, player, ytdl } from '../../client';
 import { defaultError } from '../../structures/error';
 
 export = {
@@ -13,6 +13,7 @@ export = {
         if (!args[0]) return message.reply('**Provide a title to start playing a song**');
 
         const query = args.join(' ').trim().replace(/^<(.+)>$/, '$1').toString();
+        const ytUrl = ytdl.validateURL(query);
         const queue = player.nodes.create(message.guild, {
             selfDeaf: true,
             leaveOnEnd: true,
@@ -41,7 +42,7 @@ export = {
             }).then((x) => x.tracks[0]);
         } else {
             track = await player.search(query, {
-                searchEngine: 'youtube',
+                searchEngine: ytUrl ? 'youtubeVideo' : 'youtube',
                 ignoreCache: true,
                 requestedBy: message.author
             }).then((x) => x.tracks[0]);
